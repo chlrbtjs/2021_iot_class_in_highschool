@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <!-- h1 : 제목 -->
+  <h1>LED ON/OFF</h1> 
+    <!-- button, onclick 이벤트를 지정해 주어야 함 : 버튼 -->
+  <button onclick="led_op(1)">LED ON</button>
+  <button onclick="led_op(2)">LED OFF</button>
+  <div id="result"></div>
+  <!-- 자바스크립트 -->
+  <script>    
+        // onclick 이벤트에서 호출하는 함수
+    function led_op(op) {
+      let url = (op == 1) ? "/led/on" : "/led/off";
+        // fetch : python의 led_op를 호출, 
+        // then 응답 객체가 response에 담겨 옴, 우리가 원하는건 response.text()에 담겨 옴
+        // then result 에 태그가 result인 객체를 저장, result.innerHTML에 저장?
+      fetch(url)
+      .then(response=>response.text())
+      .then(data=> {
+        let result = document.querySelector("#result");
+        result.innerHTML = "<h1>" + data + "</h1>";
+      });
+    }
+  </script>
+</body>
+</html>
